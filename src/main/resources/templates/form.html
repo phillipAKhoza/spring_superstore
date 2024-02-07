@@ -15,10 +15,7 @@
             <form method="post" th:object="${item}" action="/submitItem">
                 <select class="select" th:field="*{category}">
                     <option value="" style="color:blue">Choose Category</option>
-                    <div th:each="item : ${categories}">
-                        <option value="${item}" th:text="${item}"></option>  
-                    </div>
-                    
+                    <option th:each="item : ${categories}" th:value="${item}" th:text="${item}"></option>  
                 </select>
                 <input type="text" placeholder="Name" th:field="*{name}">
                 <input class="half" type="text" placeholder="Price" th:field="*{price}">
