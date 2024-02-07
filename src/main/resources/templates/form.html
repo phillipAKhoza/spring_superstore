@@ -12,7 +12,7 @@
         </div>
         <div class="container">    
             <h2> Global Superstore </h2>
-            <form method="post">
+            <form method="post" th:object="${item}">
                 <select class="select">
                     <option value="" style="color:blue">Choose Category</option>
                     <div th:each="item : ${categories}">
