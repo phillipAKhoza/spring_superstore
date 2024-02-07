@@ -15,7 +15,10 @@
             <form method="post">
                 <select class="select">
                     <option style="color:blue">Choose Category</option>
-                    <option> Placeholder </option>
+                    <div th:each="item : ${categories}">
+                        <option value="${item}" th:text="${item}"></option>  
+                    </div>
+                    
                 </select>
                 <input type="text" placeholder="Name">
                 <input class="half" type="text" placeholder="Price">
