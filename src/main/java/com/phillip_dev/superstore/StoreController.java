@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+
 @Controller
 public class StoreController {
 
@@ -12,6 +13,11 @@ public class StoreController {
     public String getForm(Model model) {
         model.addAttribute("categories", Constatnts.CATEGORIES);
         return "form";
+    }
+    @GetMapping("/inventory")
+    public String getInventory() {
+        
+        return "inventory";
     }
     
     
