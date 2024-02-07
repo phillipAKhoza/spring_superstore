@@ -2,12 +2,15 @@ package com.phillip_dev.superstore;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Item {
 
     private String category;
     private String name;
     private Double price;
     private Double discount;
+    @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date date;
 
 
