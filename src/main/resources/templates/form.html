@@ -14,7 +14,7 @@
             <h2> Global Superstore </h2>
             <form method="post">
                 <select class="select">
-                    <option style="color:blue">Choose Category</option>
+                    <option value="" style="color:blue">Choose Category</option>
                     <div th:each="item : ${categories}">
                         <option value="${item}" th:text="${item}"></option>  
                     </div>

@@ -10,7 +10,7 @@ public class StoreController {
 
     @GetMapping("/")
     public String getForm(Model model) {
-        model.addAttribute("categories", model);
+        model.addAttribute("categories", Constatnts.CATEGORIES);
         return "form";
     }
     
