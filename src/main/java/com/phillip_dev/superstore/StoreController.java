@@ -1,8 +1,12 @@
 package com.phillip_dev.superstore;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -16,8 +20,19 @@ public class StoreController {
     }
     @GetMapping("/inventory")
     public String getInventory() {
-        
+
         return "inventory";
+    }
+
+    private List<Item> items = new ArrayList<Item>();
+
+
+    @PostMapping("/submitItem")
+    public String handleSubmit(Item item) {
+
+        items.add(item);
+
+        return "redirect:/inventory";
     }
     
     
