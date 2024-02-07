@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class StoreController {
+    private List<Item> items = new ArrayList<Item>();
+
 
     @GetMapping("/")
     public String getForm(Model model) {
+        model.addAttribute("item", new Item());
         model.addAttribute("categories", Constatnts.CATEGORIES);
         return "form";
     }
@@ -23,9 +26,6 @@ public class StoreController {
 
         return "inventory";
     }
-
-    private List<Item> items = new ArrayList<Item>();
-
 
     @PostMapping("/submitItem")
     public String handleSubmit(Item item) {
