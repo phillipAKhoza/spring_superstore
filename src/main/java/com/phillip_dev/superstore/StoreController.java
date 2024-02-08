@@ -1,7 +1,9 @@
 package com.phillip_dev.superstore;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +58,11 @@ public class StoreController {
         return Constatnts.NOT_FOUND;
        
     }
+    public boolean within5Days(Date newDate, Date oldDate) {
+        long diff = Math.abs(newDate.getTime() - oldDate.getTime());
+        return (int) (TimeUnit.MILLISECONDS.toDays(diff)) <= 5;
+    }
+
     
     
 }
