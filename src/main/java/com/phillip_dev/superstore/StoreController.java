@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
@@ -18,14 +19,9 @@ public class StoreController {
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id) {
-        
-        
+      
         int index = getIndex(id);
-        if(index != Constatnts.NOT_FOUND){
-            model.addAttribute("item", items.get(index));
-        }else{
-            model.addAttribute("item", new Item());
-        }
+        model.addAttribute("item", index == Constatnts.NOT_FOUND ?  new Item(): items.get(index));
         model.addAttribute("categories", Constatnts.CATEGORIES);
         return "form";
     }
@@ -36,14 +32,14 @@ public class StoreController {
     }
 
     @PostMapping("/submitItem")
-    public String handleSubmit(Item item) {
+    public String handleSubmit(Item item, RedirectAttributes redirectAttributes) {
         int index = getIndex(item.getId());
         if(index == Constatnts.NOT_FOUND){
            items.add(item); 
         }else{
             items.set(index, item);
         }
-        
+        redirectAttributes.addFlashAttribute("status", Constatnts.SUCCESS_STATUS);
         return "redirect:/inventory";
     }
 
