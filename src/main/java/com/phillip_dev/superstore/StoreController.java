@@ -36,12 +36,15 @@ public class StoreController {
     @PostMapping("/submitItem")
     public String handleSubmit(Item item, RedirectAttributes redirectAttributes) {
         int index = getIndex(item.getId());
+        String status =Constatnts.SUCCESS_STATUS;
         if(index == Constatnts.NOT_FOUND){
            items.add(item); 
-        }else{
+        }else if(within5Days(item.getDate(), items.get(index).getDate())){
             items.set(index, item);
+        }else{
+            status = Constatnts.FAILED_STATUS;
         }
-        redirectAttributes.addFlashAttribute("status", Constatnts.SUCCESS_STATUS);
+        redirectAttributes.addFlashAttribute("status", status);
         return "redirect:/inventory";
     }
 
