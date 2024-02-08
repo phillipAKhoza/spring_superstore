@@ -18,9 +18,15 @@ public class StoreController {
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id) {
-        model.addAttribute("item", new Item());
+        
+        
+        int index = getIndex(id);
+        if(index != Constatnts.NOT_FOUND){
+            model.addAttribute("item", items.get(index));
+        }else{
+            model.addAttribute("item", new Item());
+        }
         model.addAttribute("categories", Constatnts.CATEGORIES);
-        System.err.println(id);
         return "form";
     }
     @GetMapping("/inventory")
