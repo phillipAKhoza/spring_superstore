@@ -44,11 +44,14 @@ public class StoreController {
     }
 
     public int getIndex(String id){
-        for(int x = 0; x <= items.size(); x++){
-            if(items.get(x).getId().equals(id)){
-                return x;
-            }
+        if(id != ""){
+            for(int x = 0; x < items.size(); x++){
+                if(items.get(x).getId().equals(id)){
+                    return x;
+                }
+            } 
         }
+       
         
         return Constatnts.NOT_FOUND;
        
