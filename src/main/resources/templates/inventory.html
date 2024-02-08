@@ -10,7 +10,12 @@
             <a  th:href="@{/}" >Form</a>
             <a class="active">Inventory</a>
         </div>
+        <div class="alert success" th:if="${status} == 'success'">
+            <strong> You successfully submited the item! </strong> 
+        </div>
+                   
         <div class="container">
+            
             <table>
                <tr class="head">
                   <th>Category</th>
@@ -23,8 +28,8 @@
                <tr th:each="item : ${items}">
                   <td th:text="${item.category}"></th>
                   <td th:text="${item.name}"></td>
-                  <td  th:text="${#numbers.formatCurrency(item.price)}"></td>
-                  <td  th:text="${#numbers.formatCurrency(item.discount)}"></td>
+                  <td th:text="${#numbers.formatCurrency(item.price)}"></td>
+                  <td th:text="${#numbers.formatCurrency(item.discount)}"></td>
                   <td type="date" th:text="${#dates.format(item.date, 'yyyy-mm-dd')}"></td>
                   <td>
                      <a role="button" style="color:white; background-color: #263238" class="table-button" th:href="@{/(id = ${item.id})}">Update</a>
