@@ -37,9 +37,13 @@ public class StoreController {
 
     @PostMapping("/submitItem")
     public String handleSubmit(Item item) {
-
-        items.add(item);
-
+        int index = getIndex(item.getId());
+        if(index == Constatnts.NOT_FOUND){
+           items.add(item); 
+        }else{
+            items.set(index, item);
+        }
+        
         return "redirect:/inventory";
     }
 
