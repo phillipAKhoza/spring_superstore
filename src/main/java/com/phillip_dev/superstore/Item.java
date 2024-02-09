@@ -5,8 +5,10 @@ import java.util.UUID;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-public class Item {
+import com.phillip_dev.superstore.Validation.Category;
 
+public class Item {
+    @Category(message = "Please choose a category")
     private String category;
     private String name;
     private Double price;
