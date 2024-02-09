@@ -6,6 +6,9 @@ import java.util.UUID;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.phillip_dev.superstore.Validation.Category;
+import com.phillip_dev.superstore.Validation.Discount;
+import com.phillip_dev.superstore.Validation.Name;
+import com.phillip_dev.superstore.Validation.Price;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -13,8 +16,11 @@ public class Item {
     @Category(message = "Please choose a category")
     private String category;
     @NotBlank(message = "Name cannot be blank")
+    @Name(message = "Name contain special charactors")
     private String name;
+    @Price(message = "Price cannot be negative")
     private Double price;
+    @Discount(message = "Discount cannot be negative")
     private Double discount;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date date;
