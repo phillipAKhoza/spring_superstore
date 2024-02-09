@@ -11,6 +11,7 @@ import com.phillip_dev.superstore.Validation.Name;
 import com.phillip_dev.superstore.Validation.Price;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 
 public class Item {
     @Category(message = "Please choose a category")
@@ -22,6 +23,7 @@ public class Item {
     private Double price;
     @Discount(message = "Discount cannot be negative")
     private Double discount;
+    @Past(message = "Date must be in the past")
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date date;
     private String id;
