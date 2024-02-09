@@ -7,9 +7,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.phillip_dev.superstore.Validation.Category;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class Item {
     @Category(message = "Please choose a category")
     private String category;
+    @NotBlank(message = "Name cannot be blank")
     private String name;
     private Double price;
     private Double discount;
