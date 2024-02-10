@@ -1,8 +1,6 @@
 package com.phillip_dev.superstore;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Controller;
@@ -13,25 +11,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.phillip_dev.superstore.repository.SuperStoreRepository;
+
 import jakarta.validation.Valid;
 
 
 
 @Controller
 public class StoreController {
-    private List<Item> items = new ArrayList<Item>();
+    
+    SuperStoreRepository superStoreRepository = new SuperStoreRepository();
 
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id) {
       
         int index = getIndex(id);
-        model.addAttribute("item", index == Constatnts.NOT_FOUND ?  new Item(): items.get(index));
+        model.addAttribute("item", index == Constatnts.NOT_FOUND ?  new Item(): superStoreRepository.getItem(index));
         return "form";
     }
     @GetMapping("/inventory")
     public String getInventory(Model model) {
-        model.addAttribute("items", items);
+        model.addAttribute("items", superStoreRepository.getItems());
         return "inventory";
     }
 
@@ -43,9 +44,9 @@ public class StoreController {
         int index = getIndex(item.getId());
         String status =Constatnts.SUCCESS_STATUS;
             if(index == Constatnts.NOT_FOUND){
-                items.add(item); 
-            }else if(within5Days(item.getDate(), items.get(index).getDate())){
-                items.set(index, item);
+                superStoreRepository.addItem(item); 
+            }else if(within5Days(item.getDate(), superStoreRepository.getItem(index).getDate())){
+                superStoreRepository.updateItem(index, item);
             }else{
                 status = Constatnts.FAILED_STATUS;
             } 
@@ -57,8 +58,8 @@ public class StoreController {
 
     public int getIndex(String id){
         if(id != ""){
-            for(int x = 0; x < items.size(); x++){
-                if(items.get(x).getId().equals(id)){
+            for(int x = 0; x < superStoreRepository.getItems().size(); x++){
+                if(superStoreRepository.getItems().get(x).getId().equals(id)){
                     return x;
                 }
             } 
