@@ -5,25 +5,25 @@ import java.util.UUID;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.phillip_dev.superstore.Validation.Category;
+
 import com.phillip_dev.superstore.Validation.NegativeNumber;
-import com.phillip_dev.superstore.Validation.Name;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 
 public class Item {
+    // @Category(message = "Please choose a category")
     @NotBlank(message = "Please choose a category")
     private String category;
-    // @Name(message = "Name contain special charactors")
     @NotBlank(message = "Name cannot be blank")
     private String name;
-    @NegativeNumber(message = "Price cannot be negative")
+    @NegativeNumber(message = "Price cannot be negative")//can use @Min() validator instead
     private Double price;
-    @NegativeNumber(message = "Discount cannot be negative")
+    @NegativeNumber(message = "Discount cannot be negative") //can use @Min() validator instead
     private Double discount;
-    @Past(message = "Date must be in the past")
+
     @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @Past(message = "Date must be in the past")
     private Date date;
     private String id;
 
@@ -79,4 +79,6 @@ public class Item {
     public void setId(String id) {
         this.id = id;
     }
+
+    
 }
