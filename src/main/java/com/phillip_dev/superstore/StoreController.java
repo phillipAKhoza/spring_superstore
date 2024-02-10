@@ -7,10 +7,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import jakarta.validation.Valid;
 
 
 
@@ -34,17 +37,22 @@ public class StoreController {
     }
 
     @PostMapping("/submitItem")
-    public String handleSubmit(Item item, RedirectAttributes redirectAttributes) {
+    public String handleSubmit(@Valid Item item, RedirectAttributes redirectAttributes, BindingResult result) {
         int index = getIndex(item.getId());
-        String status =Constatnts.SUCCESS_STATUS;
-        if(index == Constatnts.NOT_FOUND){
-           items.add(item); 
-        }else if(within5Days(item.getDate(), items.get(index).getDate())){
-            items.set(index, item);
+        if(result.hasErrors()){
+            return "form";
         }else{
-            status = Constatnts.FAILED_STATUS;
+           String status =Constatnts.SUCCESS_STATUS;
+            if(index == Constatnts.NOT_FOUND){
+                items.add(item); 
+            }else if(within5Days(item.getDate(), items.get(index).getDate())){
+                items.set(index, item);
+            }else{
+                status = Constatnts.FAILED_STATUS;
+            } 
+            redirectAttributes.addFlashAttribute("status", status);
         }
-        redirectAttributes.addFlashAttribute("status", status);
+        
         return "redirect:/inventory";
     }
 
