@@ -15,7 +15,7 @@ import jakarta.validation.constraints.Past;
 public class Item {
     @NotBlank(message = "Please choose a category")
     private String category;
-    @Name(message = "Name contain special charactors")
+    // @Name(message = "Name contain special charactors")
     @NotBlank(message = "Name cannot be blank")
     private String name;
     @NegativeNumber(message = "Price cannot be negative")
@@ -79,6 +79,4 @@ public class Item {
     public void setId(String id) {
         this.id = id;
     }
-
-    
 }
