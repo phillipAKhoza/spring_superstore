@@ -8,7 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.phillip_dev.superstore.Validation.Category;
 import com.phillip_dev.superstore.Validation.NegativeNumber;
 import com.phillip_dev.superstore.Validation.Name;
-import com.phillip_dev.superstore.Validation.Price;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
