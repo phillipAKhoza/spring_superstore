@@ -15,7 +15,9 @@
             <form method="post" th:object="${item}" action="/submitItem">
                 <select class="select" th:field="*{category}">
                     <option value="" style="color:blue">Choose Category</option>
-                    <option th:each="item : ${categories}" th:value="${item}" th:text="${item}"></option>  
+                    <option value="Furniture" >Furniture</option>
+                    <option value="Office Supplies" >Office Supplies</option>
+                    <option value="Technology" >Technology</option>
                 </select>
                 <p th:errors="*{category}" style="color:red"></p>
                 <input type="text" placeholder="Name" th:field="*{name}">
