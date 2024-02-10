@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.phillip_dev.superstore.repository.SuperStoreRepository;
+
+import com.phillip_dev.superstore.service.SuperStoreService;
 
 import jakarta.validation.Valid;
 
@@ -20,19 +21,19 @@ import jakarta.validation.Valid;
 @Controller
 public class StoreController {
     
-    SuperStoreRepository superStoreRepository = new SuperStoreRepository();
+    SuperStoreService superStoreService = new SuperStoreService();
 
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id) {
       
         int index = getIndex(id);
-        model.addAttribute("item", index == Constatnts.NOT_FOUND ?  new Item(): superStoreRepository.getItem(index));
+        model.addAttribute("item", index == Constatnts.NOT_FOUND ?  new Item(): superStoreService.getItem(index));
         return "form";
     }
     @GetMapping("/inventory")
     public String getInventory(Model model) {
-        model.addAttribute("items", superStoreRepository.getItems());
+        model.addAttribute("items", superStoreService.getItems());
         return "inventory";
     }
 
@@ -44,9 +45,9 @@ public class StoreController {
         int index = getIndex(item.getId());
         String status =Constatnts.SUCCESS_STATUS;
             if(index == Constatnts.NOT_FOUND){
-                superStoreRepository.addItem(item); 
-            }else if(within5Days(item.getDate(), superStoreRepository.getItem(index).getDate())){
-                superStoreRepository.updateItem(index, item);
+                superStoreService.addItem(item); 
+            }else if(within5Days(item.getDate(), superStoreService.getItem(index).getDate())){
+                superStoreService.updateItem(index, item);
             }else{
                 status = Constatnts.FAILED_STATUS;
             } 
@@ -58,8 +59,8 @@ public class StoreController {
 
     public int getIndex(String id){
         if(id != ""){
-            for(int x = 0; x < superStoreRepository.getItems().size(); x++){
-                if(superStoreRepository.getItems().get(x).getId().equals(id)){
+            for(int x = 0; x < superStoreService.getItems().size(); x++){
+                if(superStoreService.getItems().get(x).getId().equals(id)){
                     return x;
                 }
             } 
