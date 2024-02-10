@@ -6,7 +6,7 @@ import java.util.UUID;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.phillip_dev.superstore.Validation.Category;
-import com.phillip_dev.superstore.Validation.Discount;
+import com.phillip_dev.superstore.Validation.NegativeNumber;
 import com.phillip_dev.superstore.Validation.Name;
 import com.phillip_dev.superstore.Validation.Price;
 
@@ -19,9 +19,9 @@ public class Item {
     @NotBlank(message = "Name cannot be blank")
     @Name(message = "Name contain special charactors")
     private String name;
-    @Price(message = "Price cannot be negative")
+    @NegativeNumber(message = "Price cannot be negative")
     private Double price;
-    @Discount(message = "Discount cannot be negative")
+    @NegativeNumber(message = "Discount cannot be negative")
     private Double discount;
     @Past(message = "Date must be in the past")
     @DateTimeFormat(pattern = "yyyy-mm-dd")
