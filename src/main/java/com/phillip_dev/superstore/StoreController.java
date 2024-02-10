@@ -27,7 +27,6 @@ public class StoreController {
       
         int index = getIndex(id);
         model.addAttribute("item", index == Constatnts.NOT_FOUND ?  new Item(): items.get(index));
-        model.addAttribute("categories", Constatnts.CATEGORIES);
         return "form";
     }
     @GetMapping("/inventory")
