@@ -6,6 +6,7 @@ import jakarta.validation.ConstraintValidatorContext;
 public class CategoryValidator implements ConstraintValidator<Category, String> {
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
+        System.err.println(value);
        if(value.equals("Choose Category")) return true;
         return false;
     }

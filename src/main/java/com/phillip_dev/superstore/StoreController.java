@@ -38,12 +38,11 @@ public class StoreController {
 
     @PostMapping("/submitItem")
     public String handleSubmit(@Valid Item item, RedirectAttributes redirectAttributes, BindingResult result) {
+        // if(item.getDiscount() >= item.getPrice()) result.rejectValue("discount", "", "Discount cannot be more than price");
+        // if(result.hasErrors()) return "form";
+
         int index = getIndex(item.getId());
-        if(item.getDiscount() >= item.getPrice()) result.rejectValue("discount", "", "Discount cannot be more than price");
-        if(result.hasErrors()){
-            return "form";
-        }else{
-           String status =Constatnts.SUCCESS_STATUS;
+        String status =Constatnts.SUCCESS_STATUS;
             if(index == Constatnts.NOT_FOUND){
                 items.add(item); 
             }else if(within5Days(item.getDate(), items.get(index).getDate())){
@@ -52,7 +51,7 @@ public class StoreController {
                 status = Constatnts.FAILED_STATUS;
             } 
             redirectAttributes.addFlashAttribute("status", status);
-        }
+    
         
         return "redirect:/inventory";
     }

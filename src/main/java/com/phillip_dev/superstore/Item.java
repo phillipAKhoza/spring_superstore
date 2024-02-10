@@ -13,10 +13,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 
 public class Item {
-    @Category(message = "Please choose a category")
+    @NotBlank(message = "Please choose a category")
     private String category;
-    @NotBlank(message = "Name cannot be blank")
     @Name(message = "Name contain special charactors")
+    @NotBlank(message = "Name cannot be blank")
     private String name;
     @NegativeNumber(message = "Price cannot be negative")
     private Double price;
