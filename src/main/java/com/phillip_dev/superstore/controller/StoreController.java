@@ -20,6 +20,8 @@ import jakarta.validation.Valid;
 public class StoreController {
     // @Autowired
     SuperStoreService superStoreService;
+    // this give you an advantage of not autowiring all the dependencies but you can just initalise them and move on
+    // instead of autowiring ten services you can use the constructor to do the job for you
     public StoreController(SuperStoreService superStoreService){
         this.superStoreService = superStoreService;
     }
