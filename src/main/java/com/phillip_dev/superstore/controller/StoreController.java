@@ -18,8 +18,11 @@ import jakarta.validation.Valid;
 
 @Controller
 public class StoreController {
-    @Autowired
+    // @Autowired
     SuperStoreService superStoreService;
+    public StoreController(SuperStoreService superStoreService){
+        this.superStoreService = superStoreService;
+    }
 
     @GetMapping("/")
     public String getForm(Model model, @RequestParam(required = false) String id) {
