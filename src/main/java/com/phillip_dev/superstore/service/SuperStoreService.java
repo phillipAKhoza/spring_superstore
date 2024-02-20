@@ -4,12 +4,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.phillip_dev.superstore.Constatnts;
 import com.phillip_dev.superstore.Item;
 import com.phillip_dev.superstore.repository.SuperStoreRepository;
 
+@Service
 public class SuperStoreService {
-    SuperStoreRepository superStoreRepository = new SuperStoreRepository();
+    @Autowired
+    SuperStoreRepository superStoreRepository;
+    
     public List<Item> getItems(){
         return superStoreRepository.getItems();
     }
